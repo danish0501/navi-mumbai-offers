@@ -1,7 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/lib/auth-context';
 import { Button } from '@/components/ui/button';
-import { Search, Menu, X, User, LogOut, LayoutDashboard, Store } from 'lucide-react';
+import { Menu, X, User, LogOut, LayoutDashboard, Store, Bookmark } from 'lucide-react';
 import { useState } from 'react';
 import {
   DropdownMenu,
@@ -14,7 +14,9 @@ import {
 export function Navbar() {
   const { user, isAdmin, isShopOwner, signOut } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const navLinks = [
     { label: 'Explore Offers', href: '/offers' },
@@ -41,49 +43,67 @@ export function Navbar() {
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-6">
-          {navLinks.map(l => (
-            <Link key={l.href} to={l.href} className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors">
-              {l.label}
-            </Link>
-          ))}
+          {navLinks.map(l => {
+            const isActive = pathname.startsWith(l.href);
+            return (
+              <Link 
+                key={l.href} 
+                to={l.href} 
+                className={`relative text-base font-medium transition-colors py-1 ${
+                  isActive ? 'text-primary' : 'text-black hover:text-primary'
+                }`}
+              >
+                {l.label}
+                {isActive && (
+                  <span className="absolute -bottom-0 left-0 w-full h-[2.5px] bg-primary rounded-full" />
+                )}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" onClick={() => navigate('/search')} className="text-muted-foreground">
-            <Search className="w-5 h-5" />
-          </Button>
-
           {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-full">
-                  <User className="w-4 h-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem onClick={() => navigate(getDashboardLink())}>
-                  <LayoutDashboard className="w-4 h-4 mr-2" />
-                  Dashboard
-                </DropdownMenuItem>
-                {isShopOwner && (
-                  <DropdownMenuItem onClick={() => navigate('/owner')}>
+            <div 
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="icon" className="rounded-full">
+                    <User className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 p-3 space-y-2">
+                  <DropdownMenuItem className="cursor-pointer text-base font-semibold" onClick={() => { navigate(getDashboardLink()); setDropdownOpen(false); }}>
+                    <LayoutDashboard className="w-4 h-4 mr-2" />
+                    Dashboard
+                  </DropdownMenuItem>
+                  
+                  <DropdownMenuItem className="cursor-pointer text-base font-semibold" onClick={() => { navigate('/owner'); setDropdownOpen(false); }}>
                     <Store className="w-4 h-4 mr-2" />
                     My Shops
                   </DropdownMenuItem>
-                )}
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()}>
-                  <LogOut className="w-4 h-4 mr-2" />
-                  Sign Out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+
+                  <DropdownMenuItem className="cursor-pointer text-base font-semibold" onClick={() => { navigate('/saved'); setDropdownOpen(false); }}>
+                    <Bookmark className="w-4 h-4 mr-2" />
+                    Saved
+                  </DropdownMenuItem>
+
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="cursor-pointer text-base font-semibold" onClick={() => { signOut(); setDropdownOpen(false); }}>
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           ) : (
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" onClick={() => navigate('/login')} className="hidden sm:inline-flex">
+              <Button variant="ghost" size="sm" onClick={() => navigate('/login')} className="hidden sm:inline-flex text-base">
                 Log In
               </Button>
-              <Button size="sm" onClick={() => navigate('/signup')}>
+              <Button size="sm" onClick={() => navigate('/signup')} className="text-base">
                 Sign Up
               </Button>
             </div>

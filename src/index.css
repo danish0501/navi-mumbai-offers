@@ -6,54 +6,53 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 25% 10%;
+    --background: 220 20% 97%; /* #F5F7FA Light Gray Blue */
+    --foreground: 220 25% 10%; /* #13161A Very Dark Blue Gray */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card: 0 0% 100%; /* #FFFFFF White */
+    --card-foreground: 220 25% 10%; /* #13161A Very Dark Blue Gray */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover: 0 0% 100%; /* #FFFFFF White */
+    --popover-foreground: 220 25% 10%; /* #13161A Very Dark Blue Gray */
 
-    --primary: 174 72% 40%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 174 72% 40%; /* #1DADA0 Teal */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF White */
 
-    --secondary: 220 18% 92%;
-    --secondary-foreground: 220 25% 15%;
+    --secondary: 220 18% 92%; /* #E5E9F0 Soft Light Blue Gray */
+    --secondary-foreground: 220 25% 15%; /* #1D2128 Dark Bluish Gray */
 
-    --muted: 220 14% 94%;
-    --muted-foreground: 220 10% 46%;
+    --muted: 220 14% 94%; /* #ECEEF2 Very Light Gray */
+    --muted-foreground: 220 10% 46%; /* #6A7180 Medium Gray */
 
-    --accent: 270 30% 55%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 174 72% 40%; /* #1DADA0 Teal (Primary) */
+    --accent-foreground: 0 0% 100%; /* #FFFFFF White */
 
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%; /* #E12323 Red */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF White */
 
-    --border: 220 15% 88%;
-    --input: 220 15% 88%;
-    --ring: 174 72% 40%;
+    --border: 220 15% 88%; /* #D9DEE6 Light Grayish Blue */
+    --input: 220 15% 88%; /* #D9DEE6 Light Grayish Blue */
+    --ring: 174 72% 40%; /* #1DADA0 Teal */
 
     --radius: 0.75rem;
 
     /* Custom brand tokens */
-    --teal: 174 72% 40%;
-    --teal-light: 174 60% 92%;
-    --purple: 270 30% 55%;
-    --purple-light: 270 25% 92%;
-    --orange: 25 95% 55%;
-    --orange-light: 25 90% 92%;
-    --lime: 85 50% 50%;
-    --lime-light: 85 45% 92%;
+    --teal: 174 72% 40%; /* #1DADA0 Teal */
+    --teal-light: 174 60% 92%; /* #DFF4F2 Light Teal */
+    --orange: 25 95% 55%; /* #F9811F Orange */
+    --orange-light: 25 90% 92%; /* #FDECE1 Light Orange */
+    --lime: 85 50% 50%; /* #9CC440 Lime Green */
+    --lime-light: 85 45% 92%; /* #EAF2DF Light Lime Green */
+    --black: 0 0% 0%; /* #000000 Black */
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 174 72% 40%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 174 72% 40%;
+    --sidebar-background: 0 0% 98%; /* #FAFAFA Off-White */
+    --sidebar-foreground: 240 5.3% 26.1%; /* #3F3F46 Dark Gray */
+    --sidebar-primary: 174 72% 40%; /* #1DADA0 Teal */
+    --sidebar-primary-foreground: 0 0% 100%; /* #FFFFFF White */
+    --sidebar-accent: 240 4.8% 95.9%; /* #F4F4F5 Light Gray */
+    --sidebar-accent-foreground: 240 5.9% 10%; /* #18181B Very Dark Gray */
+    --sidebar-border: 220 13% 91%; /* #E4E7ED Light Gray */
+    --sidebar-ring: 174 72% 40%; /* #1DADA0 Teal */
   }
 }
 
@@ -88,8 +87,8 @@
   }
 
   .offer-badge-spin {
-    background-color: hsl(var(--purple-light));
-    color: hsl(var(--purple));
+    background-color: hsl(var(--primary) / 0.12);
+    color: hsl(var(--primary));
   }
 
   .offer-badge-direct {
@@ -128,6 +127,6 @@
 
   .text-gradient {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--teal)), hsl(var(--purple)));
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary)));
   }
 }
