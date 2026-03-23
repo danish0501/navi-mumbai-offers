@@ -71,7 +71,7 @@ export default function NodePage() {
           )}
         </div>
 
-        {/* Categories Section - Hidden when a category is selected to save space */}
+        {/* Categories Section */}
         <AnimatePresence>
           {!selectedCategory && (
             <motion.div 
