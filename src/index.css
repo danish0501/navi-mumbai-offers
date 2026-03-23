@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    --primary: 174 72% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 18% 92%;
+    --secondary-foreground: 220 25% 15%;
+
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 10% 46%;
+
+    --accent: 270 30% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 174 72% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand tokens */
+    --teal: 174 72% 40%;
+    --teal-light: 174 60% 92%;
+    --purple: 270 30% 55%;
+    --purple-light: 270 25% 92%;
+    --orange: 25 95% 55%;
+    --orange-light: 25 90% 92%;
+    --lime: 85 50% 50%;
+    --lime-light: 85 45% 92%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 174 72% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 174 72% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-md border border-white/40 shadow-lg;
+  }
+
+  .offer-badge-scratch {
+    @apply font-medium;
+    background-color: hsl(var(--orange-light));
+    color: hsl(var(--orange));
+  }
+
+  .offer-badge-spin {
+    background-color: hsl(var(--purple-light));
+    color: hsl(var(--purple));
+  }
+
+  .offer-badge-direct {
+    background-color: hsl(var(--teal-light));
+    color: hsl(var(--teal));
+  }
+
+  .node-chip {
+    @apply px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer;
+    @apply bg-secondary text-secondary-foreground hover:bg-primary hover:text-primary-foreground;
+    @apply active:scale-[0.97];
+  }
+
+  .node-chip-active {
+    @apply bg-primary text-primary-foreground shadow-md;
+  }
+}
+
+@layer utilities {
+  .scroll-reveal {
+    animation: scrollReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes scrollReveal {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--teal)), hsl(var(--purple)));
+  }
+}
