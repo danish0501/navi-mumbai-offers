@@ -42,16 +42,15 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden min-[770px]:flex items-center gap-6">
           {navLinks.map(l => {
             const isActive = pathname.startsWith(l.href);
             return (
-              <Link 
-                key={l.href} 
-                to={l.href} 
-                className={`relative text-base font-medium transition-colors py-1 ${
-                  isActive ? 'text-primary' : 'text-black hover:text-primary'
-                }`}
+              <Link
+                key={l.href}
+                to={l.href}
+                className={`relative text-base font-medium transition-colors py-1 ${isActive ? 'text-primary' : 'text-black hover:text-primary'
+                  }`}
               >
                 {l.label}
                 {isActive && (
@@ -64,14 +63,14 @@ export function Navbar() {
 
         <div className="flex items-center gap-3">
           {user ? (
-            <div 
+            <div
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
               <DropdownMenu open={dropdownOpen} onOpenChange={setDropdownOpen}>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon" className="rounded-full">
-                    <User className="w-4 h-4" />
+                  <Button variant="outline" size="icon" className="rounded-full h-10 w-10">
+                    <User className="w-5 h-5" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 p-3 space-y-2">
@@ -79,7 +78,7 @@ export function Navbar() {
                     <LayoutDashboard className="w-4 h-4 mr-2" />
                     Dashboard
                   </DropdownMenuItem>
-                  
+
                   <DropdownMenuItem className="cursor-pointer text-base font-semibold" onClick={() => { navigate('/owner'); setDropdownOpen(false); }}>
                     <Store className="w-4 h-4 mr-2" />
                     My Shops
@@ -99,39 +98,78 @@ export function Navbar() {
               </DropdownMenu>
             </div>
           ) : (
-            <div className="flex items-center gap-2">
-              <Button variant="ghost" size="sm" onClick={() => navigate('/login')} className="hidden sm:inline-flex text-base">
-                Log In
-              </Button>
-              <Button size="sm" onClick={() => navigate('/signup')} className="text-base">
-                Sign Up
-              </Button>
-            </div>
+            <>
+              {/* Desktop Auth Buttons */}
+              <div className="hidden min-[770px]:flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={() => navigate('/login')} className="hidden sm:inline-flex text-base">
+                  Log In
+                </Button>
+                <Button size="sm" onClick={() => navigate('/signup')} className="text-base">
+                  Sign Up
+                </Button>
+              </div>
+
+              {/* Mobile Auth Dropdown */}
+              <div className="min-[770px]:hidden">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="outline" size="icon" className="rounded-full h-8 w-8">
+                      <User className="w-4 h-4 text-black" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48 p-3 space-y-2 rounded-xl shadow-lg border-border/50">
+                    <DropdownMenuItem 
+                      className="cursor-pointer justify-center bg-secondary hover:!bg-black hover:!text-white text-foreground px-4 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-sm" 
+                      onClick={() => navigate('/login')}
+                    >
+                      Log In
+                    </DropdownMenuItem>
+                    <DropdownMenuItem 
+                      className="cursor-pointer justify-center bg-primary hover:!bg-primary/90 text-primary-foreground focus:text-primary-foreground focus:bg-primary/90 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-sm" 
+                      onClick={() => navigate('/signup')}
+                    >
+                      Sign Up
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </>
           )}
 
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileOpen(!mobileOpen)}>
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
+          <button className="min-[770px]:hidden bg-transparent hover:bg-transparent flex items-center justify-center border-none shadow-none" onClick={() => setMobileOpen(!mobileOpen)}>
+            {mobileOpen ? <X className="w-6 h-6 text-black stroke-[2]" /> : <Menu className="w-6 h-6 text-black stroke-[2]" />}
+          </button>
         </div>
       </div>
 
       {/* Mobile nav */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-border bg-card p-4 space-y-2 animate-fade-in-up">
+        <div className="min-[770px]:hidden border-t border-border bg-card p-4 space-y-2 animate-fade-in-up">
           {navLinks.map(l => (
             <Link
               key={l.href}
               to={l.href}
-              className="block px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground hover:bg-secondary hover:text-foreground transition-colors"
+              className="block px-4 py-2 rounded-lg text-base font-semibold text-black hover:bg-secondary hover:text-foreground transition-colors"
               onClick={() => setMobileOpen(false)}
             >
               {l.label}
             </Link>
           ))}
           {!user && (
-            <Link to="/login" className="block px-4 py-2 rounded-lg text-sm font-medium text-primary" onClick={() => setMobileOpen(false)}>
-              Log In
-            </Link>
+            <div className="flex flex-col gap-2 pt-4 border-t border-border mt-2">
+              <button 
+                onClick={() => { navigate('/login'); setMobileOpen(false); }}
+                className="w-full bg-secondary hover:bg-black hover:text-white text-foreground flex items-center justify-center px-4 py-2.5 rounded-lg text-base font-semibold transition-all shadow-sm"
+              >
+                Log In
+              </button>
+              <button 
+                onClick={() => { navigate('/signup'); setMobileOpen(false); }}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground flex items-center justify-center px-4 py-2.5 rounded-lg text-base font-semibold transition-all shadow-sm"
+              >
+                Sign Up
+              </button>
+            </div>
           )}
         </div>
       )}
