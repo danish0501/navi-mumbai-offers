@@ -28,7 +28,7 @@ export default function OwnerSignupPage() {
     /^[A-Za-z\\s]{2,50}$/.test(name) &&
     /^\\d{10}$/.test(mobile) &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
-    /^(?=.*[A-Za-z])(?=.*\\d).{8,}$/.test(password) &&
+    /^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$/.test(password) &&
     password === confirmPassword && password.length > 0;
 
   const isStep2Valid = emailOtp.length === 6 && mobileOtp.length === 6;
@@ -45,8 +45,8 @@ export default function OwnerSignupPage() {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = 'Please enter a valid email address.';
     }
-    if (!/^(?=.*[A-Za-z])(?=.*\\d).{8,}$/.test(password)) {
-      newErrors.password = 'At least 8 characters, 1 letter, and 1 number required.';
+    if (!/^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&]).{8,}$/.test(password)) {
+      newErrors.password = 'At least 8 characters, 1 letter, 1 number and 1 special character required.';
     }
     if (password !== confirmPassword) {
       newErrors.confirmPassword = 'Passwords do not match.';
