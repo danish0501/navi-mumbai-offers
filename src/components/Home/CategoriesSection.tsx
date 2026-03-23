@@ -73,19 +73,19 @@ export function CategoriesSection() {
         >
           {categoriesLoading ? (
             Array.from({ length: 12 }).map((_, i) => (
-              <div key={i} className="flex-none md:flex-initial h-24 w-24 md:w-auto rounded-xl bg-muted animate-pulse" />
+              <div key={i} className="flex-none md:flex-initial h-24 w-24 max-[426px]:h-[72px] max-[426px]:min-w-[140px] md:w-auto rounded-xl bg-muted animate-pulse" />
             ))
           ) : (
             categories?.map((c, i) => (
               <motion.div key={c.id} variants={item} className="flex-none md:flex-initial">
                 <Link 
                   to={`/category/${c.slug}`} 
-                  className={`flex flex-col items-center gap-2.5 p-4 rounded-xl bg-card border border-border hover:border-primary hover:shadow-md transition-all active:scale-[0.97] group min-w-[100px] md:min-w-0 ${i === (categories?.length || 0) - 1 ? 'mr-4 md:mr-0' : ''}`}
+                  className={`flex flex-col max-[426px]:flex-row items-center gap-2.5 p-4 max-[426px]:p-3 rounded-xl bg-card border border-border hover:border-primary hover:shadow-md transition-all active:scale-[0.97] group min-w-[100px] max-[426px]:min-w-[140px] md:min-w-0 ${i === (categories?.length || 0) - 1 ? 'mr-4 md:mr-0' : ''}`}
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                    <CategoryIcon name={c.icon} className="w-5 h-5 md:w-6 md:h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                  <div className="flex items-center justify-center transition-all duration-300 max-[426px]:w-auto max-[426px]:h-auto max-[426px]:bg-transparent max-[426px]:rounded-none w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 group-hover:bg-primary group-hover:text-primary-foreground">
+                    <CategoryIcon name={c.icon} className="w-5 h-5 md:w-6 md:h-6 max-[426px]:w-4 max-[426px]:h-4 text-primary group-hover:text-primary-foreground transition-colors" />
                   </div>
-                  <span className="text-xs md:text-sm font-bold text-center leading-tight text-foreground group-hover:text-primary transition-colors">{c.name}</span>
+                  <span className="text-xs md:text-sm max-[426px]:text-sm font-bold text-center max-[426px]:text-left leading-tight text-foreground group-hover:text-primary transition-colors">{c.name}</span>
                 </Link>
               </motion.div>
             ))
