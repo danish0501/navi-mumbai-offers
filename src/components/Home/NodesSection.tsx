@@ -32,6 +32,11 @@ export function NodesSection() {
     }
   };
 
+  const itemVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { opacity: 1, x: 0 }
+  };
+
   return (
     <section className="container py-8 md:py-12 space-y-4 md:space-y-6 overflow-hidden">
       <div className="flex items-end justify-between">
@@ -43,13 +48,20 @@ export function NodesSection() {
             </span>
             Local Hubs
           </div>
-          <h2 className="font-display font-black text-xl md:text-3xl max-[426px]:text-2xl text-foreground flex items-center gap-2 leading-tight">
-            Explore Your <span className="text-primary whitespace-nowrap">Locality</span>
-          </h2>
+          <div className="space-y-2 !mb-4">
+            <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl max-[426px]:text-3xl font-display font-bold tracking-tight text-foreground leading-[1.1]">
+              Explore <span className="relative inline-block">
+                <span className="text-primary italic">Locality</span>
+                <svg className="absolute -bottom-2 left-0 w-full h-2 text-primary/40" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <path d="M0 5 Q 25 0 50 5 T 100 5" stroke="currentColor" strokeWidth="4" fill="transparent" />
+                </svg>
+              </span>
+            </motion.h2>
+          </div>
         </div>
 
         {/* Swipe Indicator for Mobile */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -63,7 +75,7 @@ export function NodesSection() {
       </div>
 
       <div className="relative -mx-4 px-4 md:mx-0 md:px-0">
-        <motion.div 
+        <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -77,8 +89,8 @@ export function NodesSection() {
           ) : (
             nodes?.map((n, i) => (
               <motion.div key={n.id} variants={item} className="flex-none">
-                <Link 
-                  to={`/node/${n.slug}`} 
+                <Link
+                  to={`/node/${n.slug}`}
                   className={`group relative flex items-center gap-1.5 max-[426px]:gap-0 px-3.5 py-2 md:px-4 md:py-2 max-[426px]:px-6 max-[426px]:py-2 rounded-xl border border-border bg-card hover:border-primary transition-all duration-300 active:scale-95 whitespace-nowrap ${i === (nodes?.length || 0) - 1 ? 'mr-4 md:mr-0' : ''}`}
                 >
                   <div className="p-1 text-foreground group-hover:text-primary transition-colors">
@@ -93,7 +105,7 @@ export function NodesSection() {
             ))
           )}
         </motion.div>
-        
+
         {/* Subtle fade effect for mobile scroll hint */}
         <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-background to-transparent pointer-events-none md:hidden" />
       </div>

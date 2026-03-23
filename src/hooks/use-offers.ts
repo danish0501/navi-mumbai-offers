@@ -19,7 +19,8 @@ export function useOffers(filters: OfferFilters = {}) {
         .from('offers')
         .select(`
           *,
-          shop:shops(*, category:categories(*), node:nodes(*))
+          shop:shops(*, category:categories(*), node:nodes(*)),
+          interactions:offer_interactions(count)
         `)
         .eq('status', 'approved')
         .eq('is_active', true)
@@ -41,6 +42,7 @@ export function useOffers(filters: OfferFilters = {}) {
         query = query.ilike('title', `%${filters.search}%`);
       }
 
+      // Base sorting
       if (filters.sort === 'ending_soon') {
         query = query.order('end_date', { ascending: true });
       } else if (filters.sort === 'newest') {
@@ -52,16 +54,24 @@ export function useOffers(filters: OfferFilters = {}) {
       const { data, error } = await query;
       if (error) throw error;
 
-      // Client-side filter by node/category through shop relation
-      let filtered = data || [];
-      if (filters.nodeSlug) {
-        filtered = filtered.filter((o: any) => o.shop?.node?.slug === filters.nodeSlug);
-      }
-      if (filters.categorySlug) {
-        filtered = filtered.filter((o: any) => o.shop?.category?.slug === filters.categorySlug);
+      // Transform data and handle client-side sorting/filtering
+      let processed = (data || []).map((o: any) => ({
+        ...o,
+        usage_count: o.interactions?.[0]?.count || 0
+      }));
+
+      if (filters.sort === 'popular') {
+        processed = processed.sort((a, b) => b.usage_count - a.usage_count);
       }
 
-      return filtered;
+      if (filters.nodeSlug) {
+        processed = processed.filter((o: any) => o.shop?.node?.slug === filters.nodeSlug);
+      }
+      if (filters.categorySlug) {
+        processed = processed.filter((o: any) => o.shop?.category?.slug === filters.categorySlug);
+      }
+
+      return processed;
     },
   });
 }
