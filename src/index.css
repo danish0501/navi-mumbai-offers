@@ -36,23 +36,6 @@
 
     --radius: 0.75rem;
 
-    /* Custom brand tokens */
-    --teal: 174 72% 40%; /* #1DADA0 Teal */
-    --teal-light: 174 60% 92%; /* #DFF4F2 Light Teal */
-    --orange: 25 95% 55%; /* #F9811F Orange */
-    --orange-light: 25 90% 92%; /* #FDECE1 Light Orange */
-    --lime: 85 50% 50%; /* #9CC440 Lime Green */
-    --lime-light: 85 45% 92%; /* #EAF2DF Light Lime Green */
-    --black: 0 0% 0%; /* #000000 Black */
-
-    --sidebar-background: 0 0% 98%; /* #FAFAFA Off-White */
-    --sidebar-foreground: 240 5.3% 26.1%; /* #3F3F46 Dark Gray */
-    --sidebar-primary: 174 72% 40%; /* #1DADA0 Teal */
-    --sidebar-primary-foreground: 0 0% 100%; /* #FFFFFF White */
-    --sidebar-accent: 240 4.8% 95.9%; /* #F4F4F5 Light Gray */
-    --sidebar-accent-foreground: 240 5.9% 10%; /* #18181B Very Dark Gray */
-    --sidebar-border: 220 13% 91%; /* #E4E7ED Light Gray */
-    --sidebar-ring: 174 72% 40%; /* #1DADA0 Teal */
   }
 }
 

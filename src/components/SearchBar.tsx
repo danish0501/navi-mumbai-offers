@@ -14,12 +14,12 @@ export function SearchBar({ className = '' }: { className?: string }) {
 
   return (
     <form onSubmit={handleSubmit} className={`relative ${className}`}>
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted" />
       <Input
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search shops, categories, or areas..."
-        className="pl-10 pr-4 h-11 rounded-xl bg-card border-border"
+        className="pl-10 pr-4 h-11 rounded-xl bg-card border-border placeholder:text-muted"
       />
     </form>
   );
