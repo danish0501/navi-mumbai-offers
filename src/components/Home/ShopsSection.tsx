@@ -26,7 +26,7 @@ export function ShopsSection() {
   };
 
   return (
-   <section className="container py-16 space-y-10 overflow-hidden">
+   <section className="container py-12 space-y-10 overflow-hidden">
       <motion.div
         initial="hidden"
         whileInView="visible"

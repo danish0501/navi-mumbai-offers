@@ -5,7 +5,7 @@ import { NodesSection } from '@/components/Home/NodesSection';
 import { CategoriesSection } from '@/components/Home/CategoriesSection';
 import { OffersSection } from '@/components/Home/OffersSection';
 import { ShopsSection } from '@/components/Home/ShopsSection';
-import { CtaSection } from '@/components/Home/CtaSection';
+import { CTA } from '@/components/CTA';
 
 export default function HomePage() {
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
       <CategoriesSection />
       <OffersSection />
       <ShopsSection />
-      <CtaSection />
+      <CTA />
     </PublicLayout>
   );
 }
